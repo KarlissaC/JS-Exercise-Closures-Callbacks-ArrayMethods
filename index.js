@@ -56,10 +56,12 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
-
     /*Code Here*/
+    
+      function inning() {
 
+      return Math.floor(Math.random() * 3);
+    
 }
 
 /* Task 3: finalScore()
@@ -76,11 +78,38 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
+function finalScore(toCall, innings){
+// console.log(toCall());
 
-  /*Code Here*/
+if (innings <= 0) {
+  return 'No innings completed.';
+}
+
+let toReturn = {
+  'Home': 0,
+  'Away': 0
+}
+
+for (let i = 0; i < innings; i++) {
+  toReturn.Home += toCall();
+  toReturn.Away += toCall();
+}
+
+return toReturn;
+
+// return function getScore(){
+
+//   for (let i = 0; i < innings; i++) {
+//     toReturn.Home += toCall();
+//     toReturn.Away += toCall();
+//   }
+
+//   return toReturn;
+// }
+
 
 }
+  
 
 /* Task 4: 
 
@@ -104,8 +133,51 @@ and returns the score at each pont in the game, like so:
 
 Final Score: awayTeam - homeTeam */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+// const getInningScore(inningNumber,singleInning);
+
+return function processInning() {
+
+    
+  for (let i = counter; i < inningNumber || i < 10; i++) {
+
+    if (i === 1) {
+      numEnding = 'st';
+    }
+
+    else if (i === 2) {
+      numEnding = 'nd';
+    }
+
+    else if (i === 3) {
+      numEnding = 'rd';
+    }
+
+    else{
+      numEnding = 'th';
+    }
+
+    const curScores = getInningScore(singleInning, 1);
+    awayScore += curScores.Away;
+    homeScore += curScores.Home;
+
+    const toAdd = {
+      [`${i}${numEnding} inning`]: `${awayScore} - ${homeScore}`
+    }
+
+    scores.push(toAdd);
+    counter = i;
+  }
+
+  
+  return scores;
 }
+
+
+
+const scoreList = scoreboard(finalScore,inning,9);
+console.log(scoreList());
+
+
+
 
 
